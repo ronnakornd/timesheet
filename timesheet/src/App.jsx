@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { db } from './firebaseConfig';
+import { collection, addDoc, getDoc } from 'firebase/firestore';
 
 function App() {
-  const [currentFate, setCurrentDate] = useState(new Date);
+  let now = new Date();
+  let nowtext = now.toISOString().slice(0,10);
+  const [currentDate, setCurrentDate] = useState(nowtext);
   const [summary,setSummary] = useState(0);
   const [currentMember,setCurrentMember] = useState(
   [
@@ -82,6 +86,13 @@ function App() {
     }
 ]);
 
+ useEffect(()=> {
+        
+ },[])
+
+const fetchDate = () =>{
+   
+}
 
 const handleChange = (name,value) =>{
    let member = currentMember;
@@ -97,12 +108,25 @@ const handleChange = (name,value) =>{
    setSummary(sum);
 }
 
+const handleSave = async () => {
+  try {
+    await addDoc(collection(db, "data"), {
+      date: currentDate,
+      members: currentMember
+    });
+    alert("Data saved successfully!");
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
+
+
 
   return (
     <div className='flex justify-center flex-col items-center p-0'>
       <div>
         <h1 className='text-4xl font-bold'>OPD timesheet</h1>
-        <input className='input mt-5 borderd p-3 border-2' type="date" />
+        <input className='input mt-5 borderd p-3 border-2' type="date" value={currentDate} onChange={(e)=>setCurrentDate(e.target.value)}/>
       </div>
       <div>
         <table className='table'>
@@ -142,7 +166,7 @@ const handleChange = (name,value) =>{
         </table>
       </div>
       <div className='mt-5'>
-         <button className='btn btn-primary'>Save</button>
+         <button className='btn btn-primary' onClick={handleSave}>Save</button>
       </div>
     </div>
   )
