@@ -102,6 +102,7 @@ function App() {
           setCurrentMember(data.members);
         });
       } else {
+          setCurrentId(null);
           setCurrentMember([...defaultMember]);
       }
     } catch (e) {
@@ -145,6 +146,7 @@ function App() {
       }
     }
   };
+
 
 
 
