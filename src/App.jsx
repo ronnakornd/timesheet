@@ -123,6 +123,13 @@ function App() {
           let data = doc.data();
           setCurrentId(doc.id);
           setCurrentMember(data.members);
+          let sum = 0;
+          data.members.forEach(item => {
+            if (item.value != 99 && item.value != 101) {
+              sum += item.value;
+            }
+          });
+          setSummary(sum);
         });
       } else {
         setCurrentId(null);
@@ -132,6 +139,19 @@ function App() {
       console.error("Error adding document: ", e);
     }
   }
+
+  const nextDate = () => {
+    const date = new Date(currentDate);
+    date.setDate(date.getDate() + 1);
+    setCurrentDate(date.toISOString().split('T')[0]);
+  }
+
+  const prevDate = () => {
+    const date = new Date(currentDate);
+    date.setDate(date.getDate() - 1);
+    setCurrentDate(date.toISOString().split('T')[0]);
+  }
+
 
   const handleChange = (name, value) => {
     let member = currentMember;
@@ -259,8 +279,10 @@ function App() {
       </div>
       {currentPage == "entry" &&
         <>
-          <div>
-            <input className='input mt-5 p-3 border-2 input-bordered' type="date" value={currentDate} onChange={(e) => setCurrentDate(e.target.value)} />
+          <div className='flex gap-2 flex-row justify-center items-center mt-5'>
+            <button className='btn btn-xs btn-neutral' onClick={prevDate}>Previous</button>
+            <input className='input  p-3 border-2 input-bordered' type="date" value={currentDate} onChange={(e) => setCurrentDate(e.target.value)} />
+            <button className='btn btn-xs btn-primary' onClick={nextDate}>Next</button>
           </div>
           <div className=' overflow-x-auto md:w-full'>
             <table className='table-xs table-pin-cols  md:table-md table'>
@@ -314,17 +336,14 @@ function App() {
               <input className='input input-bordered' value={endDate} onChange={(e) => setEndDate(e.target.value)} type="date" name="" id="" />
             </label>
           </div>
-          <div className='mt-5'>
-            <button className='btn btn-primary capitalize' onClick={summarize}>summary</button>
+          <div className='mt-5 mb-5'>
+            <button className='btn btn-primary capitalize btn-sm' onClick={summarize}>summary</button>
           </div>
           <div className='w-full'>
             <table className='table table-xs'>
               <tr>
                 <th></th>
-                <th className='text-xs text-center  border-b-2'>9.00-9.15<br></br>13.00-13.15</th>
-                <th className='text-xs text-center border-b-2'>9.16-9.30<br></br>13.16-13.30</th>
-                <th className='text-xs text-center border-b-2'>9.31-10.00<br></br>13.31-14.00</th>
-                <th className='text-xs text-center border-b-2'>10.01-12.00<br></br>14.01-16.00</th>
+                <th className='text-xs text-center  border-b-2'>มาสาย</th>
                 <th className='text-xs text-center border-b-2'>ไม่มา</th>
                 <th className='text-xs text-center border-b-2'>ลืมลงชื่อ</th>
                 <th className='text-xs text-center border-b-2'>สรุป</th>
@@ -333,10 +352,7 @@ function App() {
               {summaryMembers.map(member =>
                 <tr>
                 <td className='text-xs text-center border-b-2'>{member.name}</td>
-                <td className='text-xs text-center border-b-2'>{member.fifteen}</td>
-                <td className='text-xs text-center border-b-2'>{member.thirty}</td>
-                <td className='text-xs text-center border-b-2'>{member.onehour}</td>
-                <td className='text-xs text-center border-b-2'>{member.twohour}</td>
+                <td className='text-xs text-center border-b-2'>{member.thirty+member.onehour+member.twohour}</td>
                 <td className='text-xs text-center border-b-2'>{member.absent}</td>
                 <td className='text-xs text-center border-b-2'>{member.forgot}</td>
                 <td className='text-xs text-center border-b-2 bg-slate-300 text-black'>{member.value}</td>
