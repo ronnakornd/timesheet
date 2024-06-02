@@ -109,6 +109,7 @@ function App() {
       console.error("Error adding document: ", e);
     }
   }
+
   const handleChange = (name, value) => {
     let member = currentMember;
     let index = member.findIndex(item => item.name === name);
@@ -157,7 +158,8 @@ function App() {
         <input className='input mt-5 borderd p-3 border-2' type="date" value={currentDate} onChange={(e) => setCurrentDate(e.target.value)} />
       </div>
       <div>
-        <table className='table'>
+        <table className='table-xs 
+        table'>
           <tr>
             <th></th>
             <th className='text-center border-l-2 border-b-2'>9.00-9.15<br></br>13.00-13.15</th>
@@ -193,8 +195,9 @@ function App() {
           </tr>
         </table>
       </div>
-      <div className='mt-5'>
+      <div className='mt-5 flex gap-2'>
         <button className='btn btn-primary' onClick={handleSave}>Save</button>
+        <button className='btn btn-secondary' onClick={handleSave}>Summary</button>
       </div>
     </div>
   )
