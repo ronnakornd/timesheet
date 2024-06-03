@@ -210,6 +210,8 @@ function App() {
     }
   };
 
+
+
   const summarize = async () => {
     try {
       const q = query(collection(db, "data"), where("date", ">=", new Date(startDate)), where("date", "<=", new Date(endDate)));
