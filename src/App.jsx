@@ -109,7 +109,7 @@ function App() {
       paid: false
     },
     {
-      name: "ชยวรรธย์",
+      name: "ชยวรรธก์",
       value: 0,
       paid: false
     }
