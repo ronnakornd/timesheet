@@ -17,6 +17,7 @@ function App() {
   const [summaryResult, setSummaryResult] = useState();
   const [summaryMembers, setSummaryMembers] = useState([]);
   const [summaryValue, setSummaryValue] = useState(0);
+  const [password, setPassword] = useState("");
   const defaultMember = ([
     {
       name: "พรรณทิพา",
@@ -357,7 +358,7 @@ function App() {
             </table>
           </div>
           <div className='mt-5 flex gap-2'>
-            <button className='btn btn-primary' onClick={handleSave}>Save</button>
+            <button className='btn btn-primary' onClick={()=>document.getElementById('save_modal').showModal()}>Save</button>
           </div>
         </>
       }
@@ -407,6 +408,21 @@ function App() {
           </div>
         </>
       }
+      <dialog id="save_modal" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Save Data</h3>
+          <p className="py-4">Please enter the password</p>
+          <input type="text" name="" className='input input-xs input-bordered' id="" value={password} onChange={(e)=>setPassword(e.target.value)} />
+          <div className="modal-action">
+            <form method="dialog">
+              {password == "0132" &&
+              <button className='btn btn-primary' onClick={handleSave}>Submit</button>
+              }
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   )
 }
