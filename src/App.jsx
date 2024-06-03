@@ -308,7 +308,7 @@ function App() {
             <input className='input  p-3 border-2 input-bordered' type="date" value={currentDate} onChange={(e) => setCurrentDate(e.target.value)} />
             <button className='btn btn-xs btn-primary' onClick={nextDate}>Next</button>
           </div>
-          <div className='mt-5 w-3/5 flex justify-center items-center gap-2'>
+          <div className='mt-5 w-full md:w-3/4 flex justify-center items-center gap-2'>
             <Select
               className='w-full'
               value={selectedMember}
