@@ -234,7 +234,7 @@ function App() {
               onehour: member.value == 100 ? 1 : 0,
               twohour: member.value == 200 ? 1 : 0,
               absent: member.value == 300 ? 1 : 0,
-              forgot: member.value == 99 ? 1 : 0,
+              forgot: member.value == 20 ? 1 : 0,
               value: (member.value != 99 && member.value != 101) ? member.value : 0,
               paid: member.paid
             });
@@ -251,7 +251,7 @@ function App() {
                 break;
               case 300: members[index].absent += 1
                 break;
-              case 99: members[index].forgot += 1
+              case 20: members[index].forgot += 1
                 break;
             }
             if (member.value != 99 && member.value != 101) {
@@ -345,7 +345,7 @@ function App() {
                       <td className='text-center text-xs  border-b-2'><input type="radio" className=' radio radio-xs' onChange={() => handleChange(member.name, 100)} name={member.name} id="" checked={member.value == 100} /></td>
                       <td className='text-center text-xs  border-b-2'><input type="radio" className=' radio radio-xs' onChange={() => handleChange(member.name, 200)} name={member.name} id="" checked={member.value == 200} /></td>
                       <td className='text-center text-xs  border-b-2'><input type="radio" className=' radio radio-xs' onChange={() => handleChange(member.name, 300)} name={member.name} id="" checked={member.value == 300} /></td>
-                      <td className='text-center text-xs  border-b-2'><input type="radio" className=' radio radio-xs' onChange={() => handleChange(member.name, 99)} name={member.name} id="" checked={member.value == 99} /></td>
+                      <td className='text-center text-xs  border-b-2'><input type="radio" className=' radio radio-xs' onChange={() => handleChange(member.name, 20)} name={member.name} id="" checked={member.value == 20} /></td>
                       <td className='text-center text-xs  border-b-2 bg-slate-300 text-black'>{member.value == 99 || member.value == 101 ? 0 : member.value}</td>
                     </tr>
                   )
@@ -386,8 +386,8 @@ function App() {
                 <th className='text-xs text-center border-b-2'>สถานะ</th>
               </tr>
               {summaryMembers.sort((a, b) => {
-                const sumA = a.thirty + a.onehour + a.twohour + a.absent;
-                const sumB = b.thirty + b.onehour + b.twohour + b.absent;
+                const sumA = a.thirty + a.onehour + a.twohour + a.absent +a.forgot;
+                const sumB = b.thirty + b.onehour + b.twohour + b.absent +b.forgot;
                 return sumB - sumA; // Sort in descending order
               }).map(member =>
                 <tr>
