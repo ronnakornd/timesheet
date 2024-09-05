@@ -113,6 +113,11 @@ function App() {
       name: "ชยวรรธก์",
       value: 0,
       paid: false
+    },
+    {
+      name: "พิมพ์ชนก",
+      value: 0,
+      paid: false
     }
   ]);
   const [currentMember, setCurrentMember] = useState(defaultMember);
